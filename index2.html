@@ -1,0 +1,278 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CSP Project — Interdisciplinary Sciences</title>
+  <meta name="description" content="IBDP CSP project website: Physics, Chemistry, Biology, ESS, and CS contributions." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">CSP</div>
+      <div>
+        <div class="title">IBDP CSP Project</div>
+        <div class="subtitle">Physics • Chemistry • Biology • ESS • Computer Science</div>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="#overview">Overview</a>
+      <a href="#team">Team</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="menuBtn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="heroText">
+        <h1>
+          Our <span class="accent">Collaborative Sciences Project</span>
+        </h1>
+        <p class="lead">
+          This website summarizes how each subject contributes to our CSP investigation and how the ideas connect across sciences.
+        </p>
+
+        <div class="infoRow">
+          <div class="pill">IBDP</div>
+          <div class="pill">Interdisciplinary</div>
+          <div class="pill">Data + Experiments</div>
+        </div>
+
+        <div class="heroActions">
+          <a class="btn primary" href="#subjects">Explore subjects</a>
+          <a class="btn" href="#team">Meet the team</a>
+        </div>
+
+        <div class="note">
+          <strong>Topic:</strong> <span id="topicText">[Add your CSP topic here]</span>
+          <button class="tinyBtn" onclick="editTopic()">Edit</button>
+        </div>
+      </div>
+
+      <div class="heroCard">
+        <h2>Quick Summary</h2>
+        <ul>
+          <li><strong>Physics:</strong> models + measurements</li>
+          <li><strong>Chemistry:</strong> reactions + properties</li>
+          <li><strong>Biology:</strong> ecosystem/organism impacts</li>
+          <li><strong>ESS:</strong> sustainability + society</li>
+          <li><strong>CS:</strong> data + simulation + website</li>
+        </ul>
+        <p class="small">Use the sections below to expand each part.</p>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="section">
+      <div class="sectionHead">
+        <h2>Project Overview</h2>
+        <p>What the CSP is about and why we chose it.</p>
+      </div>
+
+      <div class="card">
+        <p>
+          Our CSP integrates concepts from Physics, Chemistry, Biology, Environmental Systems & Societies (ESS),
+          and Computer Science to analyze a real-world environmental challenge and propose a solution.
+          We combine experimental data, scientific theory, and computational tools to communicate our findings clearly.
+        </p>
+
+        <div class="grid2">
+          <div class="miniCard">
+            <h3>Goal</h3>
+            <p>Investigate the system scientifically and present a clear, evidence-based conclusion.</p>
+          </div>
+          <div class="miniCard">
+            <h3>Method</h3>
+            <p>Use measurements, controlled variables, and analysis (including uncertainty) across disciplines.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team" class="section">
+      <div class="sectionHead">
+        <h2>Team</h2>
+        <p>Roles by subject.</p>
+      </div>
+
+      <div class="grid3">
+        <article class="card person">
+          <h3>Physics</h3>
+          <p class="name">Madhav Gurumoorthy</p>
+          <p class="small">Leads physical modeling, measurements, and uncertainty evaluation.</p>
+        </article>
+
+        <article class="card person">
+          <h3>Chemistry</h3>
+          <p class="name">Krishna Santhanam</p>
+          <p class="small">Analyzes reactions, composition, and chemical processes in the system.</p>
+        </article>
+
+        <article class="card person">
+          <h3>Computer Science</h3>
+          <p class="name">Vetrivel Karthikeyan</p>
+          <p class="small">Handles data processing, visualization, simulations, and website building.</p>
+        </article>
+
+        <article class="card person">
+          <h3>Biology</h3>
+          <p class="name">Keerthi Shanmugam</p>
+          <p class="small">Studies biological impacts on organisms and ecosystems.</p>
+        </article>
+
+        <article class="card person">
+          <h3>ESS</h3>
+          <p class="name">Aarna Karnani</p>
+          <p class="small">Evaluates sustainability, environmental impact, and societal implications.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SUBJECTS -->
+    <section id="subjects" class="section">
+      <div class="sectionHead">
+        <h2>Subject Contributions</h2>
+        <p>Click a subject to view its summary.</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="physics" onclick="openTab('physics')">Physics</button>
+        <button class="tab" data-tab="chem" onclick="openTab('chem')">Chemistry</button>
+        <button class="tab" data-tab="bio" onclick="openTab('bio')">Biology</button>
+        <button class="tab" data-tab="ess" onclick="openTab('ess')">ESS</button>
+        <button class="tab" data-tab="cs" onclick="openTab('cs')">Computer Science</button>
+      </div>
+
+      <div class="tabPanels">
+        <article class="card panel show" id="panel-physics">
+          <h3>Physics — Madhav Gurumoorthy</h3>
+          <p>
+            The Physics component explains the system using core physical laws and quantitative modeling.
+            It focuses on measurable variables, controlled conditions, and evaluation of experimental uncertainty.
+          </p>
+          <ul>
+            <li>Identifies key physical principles and relationships</li>
+            <li>Collects and analyzes experimental measurements</li>
+            <li>Builds graphs/models to test predictions</li>
+            <li>Evaluates limitations and uncertainty</li>
+          </ul>
+        </article>
+
+        <article class="card panel" id="panel-chem">
+          <h3>Chemistry — Krishna Santhanam</h3>
+          <p>
+            The Chemistry component focuses on chemical composition and reactions that influence the system’s behavior.
+            It connects microscopic mechanisms (molecules/ions) to macroscopic observations.
+          </p>
+          <ul>
+            <li>Analyzes chemical processes and reaction pathways</li>
+            <li>Explores material properties and composition</li>
+            <li>Connects chemical changes to environmental effects</li>
+            <li>Supports conclusions using chemical evidence</li>
+          </ul>
+        </article>
+
+        <article class="card panel" id="panel-bio">
+          <h3>Biology — Keerthi Shanmugam</h3>
+          <p>
+            The Biology component investigates how living organisms and ecosystems are affected.
+            It considers ecological interactions, biodiversity, and biological responses.
+          </p>
+          <ul>
+            <li>Examines effects on organisms and habitats</li>
+            <li>Considers ecosystem stability and food webs</li>
+            <li>Uses biological indicators to evaluate impact</li>
+            <li>Links findings to real-world environmental health</li>
+          </ul>
+        </article>
+
+        <article class="card panel" id="panel-ess">
+          <h3>ESS — Aarna Karnani</h3>
+          <p>
+            The ESS component evaluates the environmental and societal significance of the problem.
+            It focuses on sustainability, trade-offs, and long-term solutions.
+          </p>
+          <ul>
+            <li>Assesses sustainability and environmental footprint</li>
+            <li>Considers human impacts and stakeholders</li>
+            <li>Evaluates policy/solutions and feasibility</li>
+            <li>Connects science to real-world decision-making</li>
+          </ul>
+        </article>
+
+        <article class="card panel" id="panel-cs">
+          <h3>Computer Science — Vetrivel Karthikeyan</h3>
+          <p>
+            The Computer Science component supports analysis through coding, data handling, and visualization.
+            It helps communicate findings clearly and improves accuracy using computational tools.
+          </p>
+          <ul>
+            <li>Processes experimental data and organizes results</li>
+            <li>Creates graphs/visualizations and dashboards</li>
+            <li>Builds simple models or simulations (if needed)</li>
+            <li>Develops and maintains this website</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- INTEGRATION -->
+    <section class="section">
+      <div class="sectionHead">
+        <h2>How Everything Connects</h2>
+        <p>A combined summary of the interdisciplinary approach.</p>
+      </div>
+
+      <div class="card">
+        <p>
+          By combining Physics, Chemistry, Biology, ESS, and Computer Science, we can study the issue from multiple angles:
+          physical mechanisms, chemical processes, biological impact, sustainability trade-offs, and data-driven analysis.
+          This integrated approach helps us form a stronger conclusion than using one subject alone.
+        </p>
+
+        <div class="grid2">
+          <div class="miniCard">
+            <h3>Interdisciplinary Strength</h3>
+            <p>Multiple methods confirm the same idea (triangulation) and reduce bias.</p>
+          </div>
+          <div class="miniCard">
+            <h3>Communication</h3>
+            <p>CS tools make results easier to understand through graphs, summaries, and structured pages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="sectionHead">
+        <h2>Contact</h2>
+        <p>Optional (only include if teacher wants it).</p>
+      </div>
+
+      <div class="card">
+        <p class="small">
+          You can add a school email or leave this section out. If you keep it, avoid personal phone numbers.
+        </p>
+        <p><strong>School:</strong> [Your School Name]</p>
+        <p><strong>Class:</strong> IBDP CSP</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> CSP Team • Built with HTML/CSS/JS</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
