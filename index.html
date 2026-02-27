@@ -5,8 +5,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>IBDP CSP — Built Environments</title>
-  <meta name="description" content="IBDP CSP: How do surface materials influence temperature and energy demand in built environments?" />
+  <meta name="description" content="How do surface materials influence temperature and energy demand in built environments?" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- MathJax for formulas like $\pi$, Q=mcΔT, etc. -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -23,7 +32,7 @@
       <a href="#overview">Overview</a>
       <a href="#team">Team</a>
       <a href="#content">Subject Content</a>
-      <a href="#notes">Notes</a>
+      <a href="#sources">Sources</a>
     </nav>
 
     <button class="menuBtn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
@@ -31,40 +40,50 @@
 
   <main class="container">
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="top">
       <div class="heroText">
-        <h1>
-          <span class="accent">How do surface materials influence temperature and energy demand in built environments?</span>
+        <h1 class="heroTitle">
+          How do surface materials influence <span class="accent">temperature</span> and
+          <span class="accent">energy demand</span> in built environments?
         </h1>
+
         <p class="lead">
-          This site compiles each subject’s full write-up (Physics, Chemistry, Biology, ESS, CS) for our IBDP CSP.
+          This website compiles the complete CSP work across Physics, Chemistry, Biology, ESS, and Computer Science.
+          It explains how urban surface materials (roads, roofs, pavements, walls) affect heat absorption/retention and
+          how that links to cooling demand and sustainability.
         </p>
 
         <div class="infoRow">
           <div class="pill">IBDP</div>
           <div class="pill">CSP</div>
-          <div class="pill">Urban Heat</div>
+          <div class="pill">Urban Heat Island</div>
           <div class="pill">Energy Demand</div>
+          <div class="pill">Materials</div>
         </div>
 
         <div class="heroActions">
-          <a class="btn primary" href="#content">Go to subject tabs</a>
+          <a class="btn primary" href="#content">Open subject tabs</a>
           <a class="btn" href="#team">Meet the team</a>
         </div>
 
         <div class="note">
-          <strong>Tip:</strong> If you want to edit any tab text, press <em>Edit</em> inside that tab (it saves on your phone).
+          <strong>What’s inside:</strong> Full write-ups are embedded. No editing required.
         </div>
       </div>
 
-      <div class="heroCard card">
-        <h2>Quick Map</h2>
-        <ul>
-          <li><strong>Physics:</strong> energy balance, albedo, heat capacity, conduction, radiation</li>
-          <li><strong>Chemistry:</strong> molecular structure + band gaps + coatings + phase change cooling</li>
-          <li><strong>Biology:</strong> evapotranspiration, biodiversity, living pavements, green vs cool roofs</li>
-          <li><strong>ESS:</strong> UHI systems view, sustainability trade-offs, mitigation strategies</li>
-          <li><strong>CS:</strong> data handling, graphs, simulation, website</li>
+      <div class="card heroCard">
+        <h2>One-line Premise</h2>
+        <p class="small">
+          Cities heat up because many built materials have <strong>low albedo</strong>, high <strong>thermal mass</strong>,
+          and low <strong>evapotranspiration</strong>, increasing surface temperatures and indoor cooling demand.
+        </p>
+        <div class="divider"></div>
+        <ul class="miniList">
+          <li><strong>Physics:</strong> energy balance + radiation + heat capacity</li>
+          <li><strong>Chemistry:</strong> molecular absorption + coatings + phase change</li>
+          <li><strong>Biology:</strong> evapotranspiration + green infrastructure</li>
+          <li><strong>ESS:</strong> systems view + feedback loops + policy</li>
+          <li><strong>CS:</strong> structuring content + data presentation + website</li>
         </ul>
       </div>
     </section>
@@ -73,24 +92,25 @@
     <section id="overview" class="section">
       <div class="sectionHead">
         <h2>Project Overview</h2>
-        <p>What we are investigating and why it matters.</p>
+        <p>What we investigated and why it matters.</p>
       </div>
 
       <div class="card">
         <p>
-          Our CSP investigates how surface materials in built environments (roads, pavements, roofs, walls)
-          affect heat absorption/retention and how that changes temperature patterns and energy demand (especially cooling).
-          We connect physical mechanisms (radiation, conduction, thermal mass) with real-world environmental and societal impacts.
+          Built environments replace natural land covers (soil, vegetation, water) with engineered materials such as asphalt,
+          concrete, and roofing membranes. These surfaces differ in <strong>reflectivity (albedo)</strong>, <strong>heat storage (thermal mass)</strong>,
+          <strong>conductivity</strong>, and <strong>ability to support water-driven cooling</strong>. As a result, urban surfaces can reach extreme temperatures,
+          contributing to the <strong>Urban Heat Island effect</strong> and increasing demand for indoor cooling — raising electricity use, cost, and emissions.
         </p>
 
         <div class="grid2">
           <div class="miniCard">
-            <h3>Main Question</h3>
+            <h3>Driving Question</h3>
             <p><strong>How do surface materials influence temperature and energy demand in built environments?</strong></p>
           </div>
           <div class="miniCard">
-            <h3>Why it matters</h3>
-            <p>Material choice affects urban temperature, comfort, biodiversity, and electricity used for cooling.</p>
+            <h3>Outcome</h3>
+            <p>Compare how material properties change heating/cooling behavior and evaluate mitigation strategies (cool roofs, reflective pavements, green roofs).</p>
           </div>
         </div>
       </div>
@@ -99,34 +119,50 @@
     <!-- TEAM -->
     <section id="team" class="section">
       <div class="sectionHead">
-        <h2>Team</h2>
-        <p>Members and subjects.</p>
+        <h2>Team & Roles</h2>
+        <p>Subject responsibilities and project premise per member.</p>
       </div>
 
-      <div class="grid3">
+      <div class="gridTeam">
         <article class="card person">
-          <h3>Physics</h3>
-          <p class="name">Madhav Gurumoorthy</p>
+          <div class="tag">Physics</div>
+          <h3>Madhav Gurumoorthy</h3>
+          <p class="small">
+            Explains heat absorption/retention with energy balance, albedo, heat capacity, conduction, and radiative emission.
+            Connects formulas to UHI and temperature differences between materials.
+          </p>
         </article>
 
         <article class="card person">
-          <h3>Chemistry</h3>
-          <p class="name">Krishna Santhanam</p>
+          <div class="tag">Chemistry</div>
+          <h3>Krishna Santhanam</h3>
+          <p class="small">
+            Breaks down why materials absorb/retain heat at the molecular level (π-systems, band gaps), and evaluates chemical solutions like TiO₂ coatings and phase-change cooling.
+          </p>
         </article>
 
         <article class="card person">
-          <h3>Computer Science</h3>
-          <p class="name">Vetrivel Karthikeyan</p>
+          <div class="tag">Computer Science</div>
+          <h3>Vetrivel Karthikeyan</h3>
+          <p class="small">
+            Builds the website and structures the project output. Supports data presentation (tables/graphs) and clear communication of cross-subject findings.
+          </p>
         </article>
 
         <article class="card person">
-          <h3>Biology</h3>
-          <p class="name">Keerthi Shanmugam</p>
+          <div class="tag">Biology</div>
+          <h3>Keerthi Shanmugam</h3>
+          <p class="small">
+            Investigates biological cooling mechanisms (evapotranspiration, moisture retention), living pavements, green vs cool roofs, and biodiversity impacts.
+          </p>
         </article>
 
         <article class="card person">
-          <h3>ESS</h3>
-          <p class="name">Aarna Karnani</p>
+          <div class="tag">ESS</div>
+          <h3>Aarna Karnani</h3>
+          <p class="small">
+            Uses systems thinking: albedo + urban energy partitioning, UHI layers, empirical evidence, feedback loops, and real-world policy cases (e.g., Singapore, LA).
+          </p>
         </article>
       </div>
     </section>
@@ -135,83 +171,63 @@
     <section id="content" class="section">
       <div class="sectionHead">
         <h2>Subject Content</h2>
-        <p>Each tab contains the full write-up. Use <strong>Edit</strong> if you need to tweak wording for your final submission.</p>
+        <p>Full embedded write-ups from each subject.</p>
       </div>
 
-      <div class="tabs">
-        <button class="tab active" data-tab="physics" onclick="openTab('physics')">Physics</button>
-        <button class="tab" data-tab="chem" onclick="openTab('chem')">Chemistry</button>
-        <button class="tab" data-tab="bio" onclick="openTab('bio')">Biology</button>
-        <button class="tab" data-tab="ess" onclick="openTab('ess')">ESS</button>
-        <button class="tab" data-tab="cs" onclick="openTab('cs')">Computer Science</button>
+      <div class="tabs" role="tablist" aria-label="Subject tabs">
+        <button class="tab active" data-tab="physics" onclick="openTab('physics')" role="tab">Physics</button>
+        <button class="tab" data-tab="chem" onclick="openTab('chem')" role="tab">Chemistry</button>
+        <button class="tab" data-tab="bio" onclick="openTab('bio')" role="tab">Biology</button>
+        <button class="tab" data-tab="ess" onclick="openTab('ess')" role="tab">ESS</button>
+        <button class="tab" data-tab="cs" onclick="openTab('cs')" role="tab">Computer Science</button>
       </div>
 
       <div class="tabPanels">
-        <article class="card panel show" id="panel-physics">
+        <article class="card panel show" id="panel-physics" role="tabpanel">
           <div class="panelHead">
             <div>
               <h3>Physics — Madhav Gurumoorthy</h3>
-              <p class="small">Full content included.</p>
-            </div>
-            <div class="panelBtns">
-              <button class="tinyBtn" onclick="editSection('physics')">Edit</button>
-              <button class="tinyBtn danger" onclick="resetSection('physics')">Reset</button>
+              <p class="small">Full write-up embedded.</p>
             </div>
           </div>
           <div class="contentBox" id="content-physics"></div>
         </article>
 
-        <article class="card panel" id="panel-chem">
+        <article class="card panel" id="panel-chem" role="tabpanel">
           <div class="panelHead">
             <div>
               <h3>Chemistry — Krishna Santhanam</h3>
-              <p class="small">Full content included.</p>
-            </div>
-            <div class="panelBtns">
-              <button class="tinyBtn" onclick="editSection('chem')">Edit</button>
-              <button class="tinyBtn danger" onclick="resetSection('chem')">Reset</button>
+              <p class="small">Full write-up embedded.</p>
             </div>
           </div>
           <div class="contentBox" id="content-chem"></div>
         </article>
 
-        <article class="card panel" id="panel-bio">
+        <article class="card panel" id="panel-bio" role="tabpanel">
           <div class="panelHead">
             <div>
               <h3>Biology — Keerthi Shanmugam</h3>
-              <p class="small">Full content included.</p>
-            </div>
-            <div class="panelBtns">
-              <button class="tinyBtn" onclick="editSection('bio')">Edit</button>
-              <button class="tinyBtn danger" onclick="resetSection('bio')">Reset</button>
+              <p class="small">Full write-up embedded.</p>
             </div>
           </div>
           <div class="contentBox" id="content-bio"></div>
         </article>
 
-        <article class="card panel" id="panel-ess">
+        <article class="card panel" id="panel-ess" role="tabpanel">
           <div class="panelHead">
             <div>
               <h3>ESS — Aarna Karnani</h3>
-              <p class="small">You can replace this with your ESS text if needed.</p>
-            </div>
-            <div class="panelBtns">
-              <button class="tinyBtn" onclick="editSection('ess')">Edit</button>
-              <button class="tinyBtn danger" onclick="resetSection('ess')">Reset</button>
+              <p class="small">Full write-up embedded.</p>
             </div>
           </div>
           <div class="contentBox" id="content-ess"></div>
         </article>
 
-        <article class="card panel" id="panel-cs">
+        <article class="card panel" id="panel-cs" role="tabpanel">
           <div class="panelHead">
             <div>
               <h3>Computer Science — Vetrivel Karthikeyan</h3>
-              <p class="small">Edit this tab and paste your CS write-up (graphs/data/website explanation).</p>
-            </div>
-            <div class="panelBtns">
-              <button class="tinyBtn" onclick="editSection('cs')">Edit</button>
-              <button class="tinyBtn danger" onclick="resetSection('cs')">Reset</button>
+              <p class="small">Project output + website structure (ready to submit).</p>
             </div>
           </div>
           <div class="contentBox" id="content-cs"></div>
@@ -219,15 +235,15 @@
       </div>
     </section>
 
-    <section id="notes" class="section">
+    <!-- SOURCES -->
+    <section id="sources" class="section">
       <div class="sectionHead">
-        <h2>Notes</h2>
-        <p>Optional space for references / data links / screenshots list.</p>
+        <h2>Sources</h2>
+        <p>References included inside the subject write-ups (compiled view).</p>
       </div>
+
       <div class="card">
-        <p class="small">
-          Add your bibliography, datasets, field measurements, and diagram list here if your teacher expects it.
-        </p>
+        <div class="contentBox" id="content-sources"></div>
       </div>
     </section>
 
@@ -235,24 +251,6 @@
       <p>© <span id="year"></span> CSP Team • M.C.T.M Chidambaram Chettiyar International School</p>
     </footer>
   </main>
-
-  <!-- EDIT MODAL -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modalCard" role="dialog" aria-modal="true">
-      <div class="modalHead">
-        <h3 id="modalTitle">Edit</h3>
-        <button class="closeBtn" aria-label="Close" onclick="closeModal()">✕</button>
-      </div>
-
-      <p class="small">Paste or edit the full text. It saves on this device automatically.</p>
-      <textarea id="modalText" spellcheck="true"></textarea>
-
-      <div class="modalActions">
-        <button class="btn" onclick="closeModal()">Cancel</button>
-        <button class="btn primary" onclick="saveModal()">Save</button>
-      </div>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>
