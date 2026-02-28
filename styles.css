@@ -227,3 +227,134 @@ a{color:inherit;text-decoration:none}
   }
   .heroTitle{font-size:32px}
 }
+/* ---------- Simulation "cool" UI ---------- */
+.simTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+.simTitle h3{margin:0 0 6px}
+.simTitle p{margin:0}
+
+.surfaceGrid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:12px;
+  margin: 12px 0 14px;
+}
+
+.surfaceCard{
+  text-align:left;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  border-radius:18px;
+  padding:10px;
+  cursor:pointer;
+  color:var(--text);
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+.surfaceCard:hover{transform: translateY(-2px)}
+.surfaceCard.active{
+  border-color: rgba(110,168,255,.6);
+  background: linear-gradient(135deg, rgba(110,168,255,.18), rgba(124,240,212,.10));
+}
+
+.surfaceImg{
+  height:86px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+
+/* Textures (no image files needed) */
+.surfaceImg.asphalt{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.06), transparent 35%),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,.05), transparent 40%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 2px, rgba(0,0,0,.0) 2px 6px),
+    linear-gradient(135deg, #1a1f2b, #0f131b);
+}
+.surfaceImg.concrete{
+  background:
+    radial-gradient(circle at 25% 35%, rgba(0,0,0,.08), transparent 35%),
+    radial-gradient(circle at 70% 60%, rgba(0,0,0,.06), transparent 40%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 1px, rgba(255,255,255,0) 1px 7px),
+    linear-gradient(135deg, #bfc6d4, #7d869a);
+}
+.surfaceImg.white{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(110,168,255,.25), transparent 45%),
+    radial-gradient(circle at 80% 65%, rgba(124,240,212,.18), transparent 45%),
+    repeating-linear-gradient(45deg, rgba(0,0,0,.04) 0 1px, rgba(255,255,255,0) 1px 9px),
+    linear-gradient(135deg, #f6f7fb, #cfd7ff);
+}
+.surfaceImg.green{
+  background:
+    radial-gradient(circle at 30% 35%, rgba(255,255,255,.10), transparent 45%),
+    radial-gradient(circle at 70% 65%, rgba(255,255,255,.08), transparent 45%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.10) 0 2px, rgba(0,0,0,0) 2px 7px),
+    linear-gradient(135deg, #2ad27a, #145a3d);
+}
+
+.surfaceMeta{margin-top:10px}
+.surfaceName{font-weight:900; margin-bottom:4px}
+.surfaceTag{color:var(--muted); font-size:12px; font-weight:700}
+
+/* Sim grid */
+.simGrid{
+  display:grid;
+  grid-template-columns: 340px 1fr;
+  gap:14px;
+  align-items:start;
+  margin-top:10px;
+}
+.simControls .rowBtns{display:flex; gap:10px; margin-top:12px}
+.msgBox{
+  padding:12px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+  color:var(--muted);
+}
+
+.simOut{
+  margin-top:12px;
+  padding:12px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+  color:var(--muted);
+}
+.tinyNote{margin-top:10px}
+
+.simChartWrap{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:12px;
+  background:rgba(255,255,255,.02);
+}
+.chartHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:8px;
+}
+.chartTitle{font-weight:900}
+.badge{
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  color:var(--muted);
+  font-weight:900;
+  font-size:12px;
+}
+
+/* Mobile */
+@media (max-width: 980px){
+  .surfaceGrid{grid-template-columns:1fr 1fr}
+  .simGrid{grid-template-columns:1fr}
+}
