@@ -234,6 +234,107 @@
         </article>
       </div>
     </section>
+    <!-- SIMULATION (cool UI) -->
+<section class="section" id="sim">
+  <div class="sectionHead">
+    <h2>Interactive Simulation</h2>
+    <p>Pick a surface → watch temperature + cooling demand change over a day.</p>
+  </div>
+
+  <div class="card">
+    <div class="simTop">
+      <div class="simTitle">
+        <h3>Choose a Surface</h3>
+        <p class="small">Click a tile. The site runs a physics-based model (albedo + radiation + convection + thermal mass).</p>
+      </div>
+
+      <button class="btn" id="randomBtn" onclick="randomSurface()">🎲 Random surface</button>
+    </div>
+
+    <div class="surfaceGrid" role="list">
+      <button class="surfaceCard active" data-mat="asphalt" onclick="selectSurface('asphalt')" role="listitem">
+        <div class="surfaceImg asphalt"></div>
+        <div class="surfaceMeta">
+          <div class="surfaceName">Asphalt</div>
+          <div class="surfaceTag">Low albedo • High heat</div>
+        </div>
+      </button>
+
+      <button class="surfaceCard" data-mat="concrete" onclick="selectSurface('concrete')" role="listitem">
+        <div class="surfaceImg concrete"></div>
+        <div class="surfaceMeta">
+          <div class="surfaceName">Concrete</div>
+          <div class="surfaceTag">Medium albedo • Thermal mass</div>
+        </div>
+      </button>
+
+      <button class="surfaceCard" data-mat="white" onclick="selectSurface('white')" role="listitem">
+        <div class="surfaceImg white"></div>
+        <div class="surfaceMeta">
+          <div class="surfaceName">Cool / White Roof</div>
+          <div class="surfaceTag">High albedo • Reflects sun</div>
+        </div>
+      </button>
+
+      <button class="surfaceCard" data-mat="green" onclick="selectSurface('green')" role="listitem">
+        <div class="surfaceImg green"></div>
+        <div class="surfaceMeta">
+          <div class="surfaceName">Green / Wet Surface</div>
+          <div class="surfaceTag">Evap cooling • Biodiversity</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="simGrid">
+      <div class="simControls">
+        <div class="msgBox" id="surfaceMsg">
+          Asphalt selected. This one **absorbs** sunlight like it’s charging for boss fight.
+        </div>
+
+        <label class="lbl">Peak solar (W/m²)</label>
+        <input id="peakI" class="input" type="number" value="900" />
+
+        <label class="lbl">Air temperature (°C)</label>
+        <input id="airT" class="input" type="number" value="32" />
+
+        <label class="lbl">Wind factor (0.5–2.0)</label>
+        <input id="wind" class="input" type="number" step="0.1" value="1.0" />
+
+        <label class="lbl">Comfort threshold (°C)</label>
+        <input id="thresh" class="input" type="number" value="26" />
+
+        <div class="rowBtns">
+          <button class="btn primary" onclick="runSim()">Run simulation</button>
+          <button class="btn" onclick="funFact()">😼 Fun fact</button>
+        </div>
+
+        <div class="simOut">
+          <div><strong>Peak surface temp:</strong> <span id="peakT">—</span> °C</div>
+          <div><strong>Cooling degree-hours:</strong> <span id="cdh">—</span></div>
+          <div class="small" id="verdict">Pick a surface to get roasted (or cooled).</div>
+        </div>
+
+        <div class="tinyNote small">
+          *Model is simplified (1 m² patch, smooth solar curve, constant air temp). Still great for comparing materials.
+        </div>
+      </div>
+
+      <div class="simChartWrap">
+        <div class="chartHead">
+          <div>
+            <div class="chartTitle">Surface Temperature vs Time</div>
+            <div class="small" id="chartSub">24-hour model output</div>
+          </div>
+          <div class="badge" id="badge">Asphalt</div>
+        </div>
+        <canvas id="chart" height="150"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chart.js (needed for graph) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- SOURCES -->
     <section id="sources" class="section">
