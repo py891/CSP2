@@ -368,3 +368,164 @@ function render(){
 }
 
 render();
+// ---------- Simulation logic (cool version) ----------
+let simChart = null;
+let selectedMat = "asphalt";
+
+const matProfiles = {
+  asphalt: { name:"Asphalt", albedo:0.08, emiss:0.95, mass:40, c:920,  h:12, evap:0.0 },
+  concrete:{ name:"Concrete",albedo:0.25, emiss:0.90, mass:50, c:880,  h:10, evap:0.0 },
+  white:   { name:"Cool / White Roof", albedo:0.70, emiss:0.90, mass:25, c:900,  h:10, evap:0.0 },
+  green:   { name:"Green / Wet", albedo:0.20, emiss:0.95, mass:35, c:4200, h:10, evap:80.0 }
+};
+
+const roastLines = {
+  asphalt: [
+    "Asphalt selected. This one **absorbs** sunlight like it’s charging for a boss fight.",
+    "Asphalt: turning photons into pain since forever 💀",
+    "Congrats, you picked the *air-fryer* setting."
+  ],
+  concrete: [
+    "Concrete selected. Not as bad as asphalt, but it still stores heat like a savings account.",
+    "Concrete: medium reflectance, high ‘I’ll stay warm at night’ energy.",
+    "Concrete: the ‘I’m responsible but still problematic’ surface."
+  ],
+  white: [
+    "Cool roof selected. This surface said: ‘No thanks’ to solar radiation.",
+    "White roof: the NPC of energy savings (and it works).",
+    "White roof: reflect mode ON ✨"
+  ],
+  green: [
+    "Green/wet surface selected. Nature’s AC: evapotranspiration doing the heavy lifting.",
+    "Green surface: the only one that *sweats* for the team.",
+    "Green surface: biodiversity + cooling. Massive W."
+  ]
+};
+
+function setBadge(text){
+  const b = document.getElementById("badge");
+  if (b) b.textContent = text;
+}
+
+function selectSurface(key){
+  selectedMat = key;
+
+  document.querySelectorAll(".surfaceCard").forEach(card=>{
+    card.classList.toggle("active", card.dataset.mat === key);
+  });
+
+  const msg = roastLines[key][Math.floor(Math.random() * roastLines[key].length)];
+  const msgEl = document.getElementById("surfaceMsg");
+  if (msgEl) msgEl.innerHTML = msg;
+
+  setBadge(matProfiles[key].name);
+  runSim();
+}
+
+function randomSurface(){
+  const keys = Object.keys(matProfiles);
+  const pick = keys[Math.floor(Math.random()*keys.length)];
+  selectSurface(pick);
+}
+
+function funFact(){
+  const facts = [
+    "Fun fact: Dark surfaces can hit **70–80°C** in peak sun (UHI studies). 🔥",
+    "Fun fact: ‘Cooling degree-hours’ is basically how long + how far you’re above comfort temp.",
+    "Fun fact: High albedo helps in hot climates, but can cause glare if overdone.",
+    "Fun fact: Green roofs cool using latent heat (evaporation), not just reflection."
+  ];
+  const msgEl = document.getElementById("surfaceMsg");
+  msgEl.innerHTML = facts[Math.floor(Math.random()*facts.length)];
+}
+
+function runSim(){
+  const p = matProfiles[selectedMat];
+
+  const peakI = Number(document.getElementById("peakI").value);
+  const airT  = Number(document.getElementById("airT").value);
+  const wind  = Number(document.getElementById("wind").value);
+  const thresh = Number(document.getElementById("thresh").value);
+
+  const dt = 60;                 // 1 min
+  const steps = 24*60;
+  const sigma = 5.670374419e-8;
+  const area = 1.0;
+
+  let T = airT;
+  let peakT = -1e9;
+  let cdh = 0;
+
+  const times = [];
+  const temps = [];
+
+  for (let i=0; i<steps; i++){
+    const hour = i/60;
+
+    // smooth solar curve: sunrise 6, sunset 18
+    let I = 0;
+    if (hour >= 6 && hour <= 18){
+      const x = (hour - 6) / 12;
+      I = peakI * Math.sin(Math.PI * x);
+    }
+
+    const Qin = (1 - p.albedo) * I;
+    const hEff = p.h * wind;
+    const Qconv = hEff * (T - airT);
+
+    const Tk = T + 273.15;
+    const Tak = airT + 273.15;
+    const Qrad = p.emiss * sigma * (Math.pow(Tk,4) - Math.pow(Tak,4));
+
+    const Qevap = p.evap;
+    const Qnet = Qin - Qconv - Qrad - Qevap;
+
+    T = T + (Qnet * area * dt) / (p.mass * p.c);
+
+    if (T > peakT) peakT = T;
+    if (T > thresh) cdh += (T - thresh) * (dt/3600);
+
+    times.push(hour);
+    temps.push(T);
+  }
+
+  document.getElementById("peakT").textContent = peakT.toFixed(1);
+  document.getElementById("cdh").textContent = cdh.toFixed(1);
+
+  // verdict line (fun + informative)
+  const v = document.getElementById("verdict");
+  if (peakT >= 65) v.textContent = "Verdict: This surface is basically a frying pan. Expect higher AC demand.";
+  else if (peakT >= 50) v.textContent = "Verdict: Warm-to-hot. Better than asphalt, but still pushes cooling demand.";
+  else v.textContent = "Verdict: Pretty chill. Lower peak temps → lower cooling demand.";
+
+  // plot
+  const ctx = document.getElementById("chart").getContext("2d");
+  if (simChart) simChart.destroy();
+
+  simChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: times.map(h => h.toFixed(0)),
+      datasets: [{
+        label: `${p.name} — Surface Temperature (°C)`,
+        data: temps,
+        tension: 0.25,
+        pointRadius: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true } },
+      scales: {
+        x: { title: { display: true, text: "Hour of day" } },
+        y: { title: { display: true, text: "Temperature (°C)" } }
+      }
+    }
+  });
+}
+
+// Auto-run once when page loads (nice first impression)
+window.addEventListener("load", () => {
+  // Only run if the simulation elements exist on the page
+  if (document.getElementById("chart")) selectSurface("asphalt");
+});
